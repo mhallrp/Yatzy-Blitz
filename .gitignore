@@ -1,0 +1,6 @@
+Podfile
+Pods/
+AppDelegate.swift
+Assets.xcassets/
+Fonts/
+.log
