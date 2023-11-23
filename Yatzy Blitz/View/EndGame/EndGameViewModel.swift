@@ -93,7 +93,6 @@ class EndGameViewModel: ObservableObject{
             }
         } else {
             gameData.resetToDefault()
-            print("Reset to default")
         }
     }
 }

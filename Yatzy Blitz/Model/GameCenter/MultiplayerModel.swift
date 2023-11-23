@@ -35,7 +35,6 @@ class MultiplayerModel: NSObject, ObservableObject, GKMatchDelegate {
         disconnectedPlayerName = ""
         receiviedRematchRequest = false
         rematchConfirmation = nil
-        print("multiplayer model reset")
     }
     
     func getPlayerNames() -> (local: String?, opponent: String?) {

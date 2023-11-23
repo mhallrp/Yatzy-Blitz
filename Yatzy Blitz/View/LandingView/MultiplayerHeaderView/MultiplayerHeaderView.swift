@@ -7,9 +7,7 @@ struct MultiplayerHeaderView: View {
     var body: some View {
         HStack {
             Button(action: {
-                withAnimation(.easeIn(duration: 0.2))
-                {
-                    print("IM RUNNING")
+                withAnimation(.easeIn(duration: 0.2)) {
                     showMultiplayerOptions = false
                 }
             }) { Image(systemName: "chevron.left")

@@ -2,6 +2,7 @@ import SwiftUI
 import StoreKit
 
 @main
+
 struct YatzyBlitzApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -22,12 +23,5 @@ struct YatzyBlitzApp: App {
             }
         }
     }
-    
-    
-    //** FOR FUTURE PAYMENT MODEL
-//    init() {
-//        SKPaymentQueue.default().add(PurchaseManager.shared)
-//    }
-    
 }
 
