@@ -7,11 +7,8 @@ Fonts/
 info.plist
 Sound\ FX/
 Preview\ Content/
-
+Yatzy\ Blitz.xcworkspace
+Yatzy\ Blitz.xcodeproj
 YatzyBlitz.entitlements
-Yatzy_Blitz.xcworkspace
-Yatzy_Blitz.xcodeproj
-
 .DS_Store
 Podfile.lock
-.gitignore
