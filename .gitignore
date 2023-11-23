@@ -5,8 +5,8 @@ Assets.xcassets/
 Fonts/
 .log
 info.plist
-Sound_FX/
-Preview_Content/
+Sound\ FX/
+Preview\ Content/
 
 YatzyBlitz.entitlements
 Yatzy_Blitz.xcworkspace
