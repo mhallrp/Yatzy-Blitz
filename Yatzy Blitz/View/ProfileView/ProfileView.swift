@@ -36,7 +36,6 @@ struct ProfileView: View {
                 }
             }
             .navigationBarTitle("Profile")
-
         }
     }
     
@@ -57,11 +56,5 @@ private var GameCenterDashboardDelegateAssociationKey: UInt8 = 1
 class GameCenterDashboardDelegate: NSObject, GKGameCenterControllerDelegate {
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismiss(animated: true, completion: nil)
-    }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
     }
 }

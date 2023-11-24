@@ -4,12 +4,7 @@ struct EmoteView: View {
     
     @Binding var emoteView: Bool
     var animateEmoticon: (String) -> Void
-
-    let emoticons: [[String]] = [
-        ["😀", "😉", "😍", "🤩", "😜"],
-        ["🤔", "🙄", "😎", "😇", "😂"],
-        ["🥰", "😅", "😤", "😱", "😓"]
-    ]
+    let emoticons: [[String]] = [["😀", "😉", "😍", "🤩", "😜"], ["🤔", "🙄", "😎", "😇", "😂"], ["🥰", "😅", "😤", "😱", "😓"]]
 
     var body: some View {
         GeometryReader { geometry in
@@ -43,6 +38,7 @@ struct EmoteView: View {
 }
 
 struct EmoticonButton: View {
+    
     let emote: String
     let action: () -> Void
     let animate: () -> Void
@@ -56,7 +52,7 @@ struct EmoticonButton: View {
     init(emote: String, action: @escaping () -> Void) {
         self.emote = emote
         self.action = action
-        self.animate = {}  // Provide a default empty closure here
+        self.animate = {}
     }
 
     var body: some View {

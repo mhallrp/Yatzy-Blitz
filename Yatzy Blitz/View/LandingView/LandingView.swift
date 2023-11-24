@@ -98,13 +98,6 @@ struct LandingView: View {
         .accentColor(.black)
     }
 }
-struct LandingView_Previews: PreviewProvider {
-    static var previews: some View {
-        LandingView()
-    }
-}
-
-
 
 class UMPViewController: UIViewController {
     var canLoadAdsCallback: (() -> Void)?
@@ -132,7 +125,6 @@ class UMPViewController: UIViewController {
                     }
                 }
             })
-        
     }
     
     func loadForm() {
@@ -165,8 +157,6 @@ class UMPViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // Your existing code and UI setup here
 }
 
 struct UMPWrapper: UIViewControllerRepresentable {

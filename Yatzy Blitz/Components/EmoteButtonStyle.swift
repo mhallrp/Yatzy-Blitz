@@ -2,7 +2,7 @@ import SwiftUI
 
 struct EmoteButtonStyling: ButtonStyle {
 
-        var isPressed: Bool
+    var isPressed: Bool
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

@@ -2,8 +2,6 @@ import SwiftUI
 
 class EmoticonAnimator: ObservableObject {
 
-
-    
     struct Emoticon {
         var id: UUID = UUID()
         var symbol: String

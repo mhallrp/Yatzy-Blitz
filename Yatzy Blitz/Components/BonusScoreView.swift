@@ -15,7 +15,6 @@ struct BonusScoreView: View {
         RoundedRectangle(cornerRadius: 8)
             .foregroundColor(.white)
             .frame(minHeight: 45, maxHeight: UIDevice.current.userInterfaceIdiom == .pad ? 100 : .infinity)
-    
             .overlay(
                 HStack {
     
@@ -34,7 +33,6 @@ struct BonusScoreView: View {
                     .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 8 : 0)
             )
     }
-    
     
     private func generateCircleView(scores: [Int?], active:Bool) -> some View {
         Circle()
@@ -60,6 +58,3 @@ struct BonusScoreView: View {
         return ""
     }
 }
-
-
-
