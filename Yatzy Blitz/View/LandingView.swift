@@ -1,10 +1,10 @@
 import SwiftUI
 import GameKit
-import UserMessagingPlatform
 
 struct LandingView: View {
     
     var isMatchStarted: Bool { viewModel.match != nil || gcManager.receivedInvite != nil }
+    
     @StateObject var viewModel = MultiplayerModel()
     @StateObject var gameData = GameData()
     @ObservedObject var gcManager = GameCenterManager.shared
