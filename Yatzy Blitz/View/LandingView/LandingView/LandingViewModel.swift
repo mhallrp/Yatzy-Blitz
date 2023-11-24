@@ -4,6 +4,7 @@ import GameKit
 extension LandingView{
     
     func presentMatchmaker() {
+        
         let matchRequest = GKMatchRequest()
         matchRequest.minPlayers = 2
         matchRequest.maxPlayers = 2
@@ -17,7 +18,6 @@ extension LandingView{
             }
         }
     }
-    
 }
 
 private var MatchmakerDelegateAssociationKey: UInt8 = 0
