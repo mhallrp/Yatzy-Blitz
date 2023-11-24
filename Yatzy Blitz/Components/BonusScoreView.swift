@@ -17,7 +17,6 @@ struct BonusScoreView: View {
             .frame(minHeight: 45, maxHeight: UIDevice.current.userInterfaceIdiom == .pad ? 100 : .infinity)
             .overlay(
                 HStack {
-    
                     Image("Bonus35")
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)

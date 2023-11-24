@@ -3,8 +3,9 @@ import SwiftUI
 struct LandingButtonsStack: View {
     
     @Binding var showMultiplayerOptions: Bool
-    @Binding var navigationPath: [LandingView.NavigationDestination]
+    @Binding var navigationPath: [NavigationDestination]
     @State var isPressed = [false, false, false]
+    
     let presentMatchmakerAction: () -> Void
     
     var body: some View {

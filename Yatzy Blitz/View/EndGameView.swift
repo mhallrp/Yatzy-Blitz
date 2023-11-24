@@ -16,7 +16,6 @@ struct EndGameView: View {
     var isAIMatch:Bool
     private let adViewControllerRepresentable = AdViewControllerRepresentable()
     
-    
     func backToHome(){
         endGameViewModel.resetValues(multiplayerModel: multiplayerModel, gameData: gameData)
         backToLanding = true
@@ -98,7 +97,6 @@ struct EndGameView: View {
         .onChange(of: multiplayerModel.receiviedRematchRequest, perform: { newValue in
             if newValue == nil { return }
             rr = true
-            
         })
     }
 }

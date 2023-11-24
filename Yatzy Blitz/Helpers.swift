@@ -20,3 +20,10 @@ enum PlayerAuthState:String{
     case restricted = "You are not allowed to play multiplayer games!"
 }
 
+enum NavigationDestination {
+    case onlineMatch
+    case newAIGame
+    case localMultiplayer
+    case settings
+    case profile
+}

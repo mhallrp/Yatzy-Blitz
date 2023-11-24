@@ -11,21 +11,11 @@ struct LandingView: View {
     @State private var showMultiplayerOptions = false
     @State private var navigationPath: [NavigationDestination] = []
     
-    enum NavigationDestination {
-        case onlineMatch
-        case newAIGame
-        case localMultiplayer
-        case settings
-        case profile
-    }
-    
     var body: some View {
         NavigationStack(path: $navigationPath) {
             NavigationView {
                 ZStack {
-                    UMPWrapper(canLoadAdsCallback: {
-                        debugPrint("Can load ads now")
-                    })
+                    UMPWrapper(canLoadAdsCallback: {})
                     BackgroundView()
                     .onAppear { viewModel.match = nil }
                     if !isMatchStarted {
@@ -38,27 +28,7 @@ struct LandingView: View {
                             LandingButtonsStack(showMultiplayerOptions: $showMultiplayerOptions, navigationPath: $navigationPath, presentMatchmakerAction: presentMatchmaker)
                             BackgroundPickerView()
                         }
-                        .navigationBarItems(trailing:
-                                                HStack(spacing: 16) {
-                            Button(action: {
-                                self.navigationPath = [.settings]
-                            }) {
-                                Image(systemName: "gear")
-                                    .resizable()
-                                    .foregroundColor(.black)
-                                    .frame(width: 22, height: 22)
-                            }
-                            
-                            Button(action: {
-                                self.navigationPath = [.profile]
-                            }) {
-                                Image(systemName: "person.crop.circle.fill")
-                                    .resizable()
-                                    .foregroundColor(.black)
-                                    .frame(width: 22, height: 22)
-                            }
-                        }
-                        )
+                        .navigationBarItems(trailing: LandingNavButtons(navigationPath: $navigationPath))
                     }
                 }
             }
