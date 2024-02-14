@@ -5,20 +5,18 @@ class MultiplayerModel: NSObject, ObservableObject, GKMatchDelegate {
     @Published var match: GKMatch?
     @Published var player: GKPlayer?
     @Published var isMyTurn = true
-    
     @Published var firstPLayer = true
     @Published var receivedMessage = ""
     @Published var messageToSend = ""
     @Published var showDisconnectAlert = false
     @Published var disconnectedPlayerName: String = ""
-    
     @Published var receiviedRematchRequest: Bool? = false
     @Published var rematchConfirmation: Bool? = nil
-    
     var playerUUIDKey = UUID().uuidString
     var opponentUUIDKey: String?
     
     var gameData: GameData?
+    var animate: EmoticonAnimator?
     
     func setup(match: GKMatch) {
         self.match = match
@@ -50,7 +48,7 @@ class MultiplayerModel: NSObject, ObservableObject, GKMatchDelegate {
             return (nil, nil)
         }
     }
-
+    
     
     private func determineFirstTurn() {
         if self.playerUUIDKey < (self.opponentUUIDKey ?? "") {
@@ -106,6 +104,17 @@ class MultiplayerModel: NSObject, ObservableObject, GKMatchDelegate {
         }
     }
 
+    func sendEmoji(emoji:String) {
+        let emojiResponse = Emoji(emoji: emoji)
+        if let emojiResponseData = try? JSONEncoder().encode(emojiResponse) {
+            do {
+                try match?.sendData(toAllPlayers: emojiResponseData, with: .reliable)
+            } catch {
+                print("Failed to send rematch request: \(error)")
+            }
+        }
+    }
+    
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         if let initialConnectionData = try? JSONDecoder().decode(InitialConnectionData.self, from: data) {
             self.opponentUUIDKey = initialConnectionData.playerUUID
@@ -118,6 +127,8 @@ class MultiplayerModel: NSObject, ObservableObject, GKMatchDelegate {
             } else {
                 self.rematchConfirmation = false
             }
+        }else if let emojiData = try? JSONDecoder().decode(Emoji.self, from: data) {
+            animate?.startEmoticonAnimation(emote:decode(emojiData.emoji)!)
         } else if let receivedGameState = try? JSONDecoder().decode(GameState.self, from: data),
                   receivedGameState.senderUUIDKey != self.playerUUIDKey {
             gameData?.currentRoll = receivedGameState.currentRoll
@@ -164,6 +175,10 @@ class MultiplayerModel: NSObject, ObservableObject, GKMatchDelegate {
         self.disconnectedPlayerName = player.alias
         self.showDisconnectAlert = true
     }
+    func decode(_ s: String) -> String? {
+        let data = s.data(using: .utf8)!
+        return String(data: data, encoding: .nonLossyASCII)
+    }
 }
 
 struct GameState: Codable {
@@ -185,6 +200,7 @@ struct GameState: Codable {
     var roundNumber: Int
     var winner: Bool?
     var draw: Bool?
+    var emoji:String?
 }
 
 struct RematchRequest: Codable {
@@ -195,6 +211,11 @@ struct RematchConfirmation: Codable {
     var confirmRematch: Bool
 }
 
+struct Emoji:Codable {
+    var emoji:String
+}
+
 struct InitialConnectionData: Codable {
     var playerUUID: String
 }
+

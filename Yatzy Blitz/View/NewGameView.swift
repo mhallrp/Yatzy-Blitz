@@ -5,7 +5,7 @@ struct NewGameView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var multiplayerModel: MultiplayerModel
     @ObservedObject var gameData: GameData
-    @StateObject var emoticonAnimator = EmoticonAnimator()
+    @ObservedObject var emoticonAnimator: EmoticonAnimator
     @State var showExitAlert = false
     @State var landscape = false
     @State var showEndScreen = false
@@ -31,7 +31,7 @@ struct NewGameView: View {
                     .edgesIgnoringSafeArea(.all)
             } else {
                 gameLayout
-                emoteView ? EmoteView(emoteView: $emoteView, animateEmoticon: emoticonAnimator.startEmoticonAnimation) : nil
+                emoteView ? EmoteView(emoteView: $emoteView, multiplayerModel: multiplayerModel, animateEmoticon: emoticonAnimator.startEmoticonAnimation) : nil
             }
             ForEach(emoticonAnimator.floatingEmoticons, id: \.id) { emote in
                 EmoticonView(emote: emote)

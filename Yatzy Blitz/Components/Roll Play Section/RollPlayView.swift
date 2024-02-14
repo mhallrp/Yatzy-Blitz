@@ -13,6 +13,7 @@ struct RollPlayView: View {
     
     var body: some View {
         HStack(alignment: .top){
+            //ROLL BUTTON
             Button(action:{
                 if multiplayerModel.isMyTurn && gameData.rollCount > 0 {
                     gameData.isRolling = true
@@ -21,20 +22,24 @@ struct RollPlayView: View {
             }){}
                 .transaction { t in t.animation = nil }
                 .pressAction { isPressed[0] = true } onRelease: { isPressed[0] = false }
-                .buttonStyle(RollButtonStyling(active: gameData.rollCount != 0 ? true : false, roll: true, text:"Roll", rollCount: gameData.rollCount, isMyTurn: multiplayerModel.isMyTurn, isPressed: isPressed[0]))
+                .buttonStyle(RollPlayButtonStyling(active: gameData.rollCount != 0 ? true : false, roll: true, text:"Roll", rollCount: gameData.rollCount, isMyTurn: multiplayerModel.isMyTurn, isPressed: isPressed[0]))
+            //PLAY BUTTON
             Button(action:{
                 rollPlayViewModel.handlePlayAction(gameData: gameData, multiplayerModel: multiplayerModel, isAIMatch: isAIMatch, isLocal: isLocal)
             }){
             }
             .transaction { t in t.animation = nil }
             .pressAction { isPressed[1] = true } onRelease: { isPressed[1] = false }
-            .buttonStyle(RollButtonStyling(active: gameData.playIsActive ? true : false, roll: false, text:"Play", rollCount: gameData.rollCount, isMyTurn: multiplayerModel.isMyTurn, isPressed: isPressed[1]))
-            Button(action:{
-                emoteView = true
-            }){}
-                .transaction { t in t.animation = nil }
-                .pressAction{ isPressed [2] = true} onRelease: { isPressed[2] = false }
-                .buttonStyle(EmoteButtonStyling(isPressed: isPressed[2]))
+            .buttonStyle(RollPlayButtonStyling(active: gameData.playIsActive ? true : false, roll: false, text:"Play", rollCount: gameData.rollCount, isMyTurn: multiplayerModel.isMyTurn, isPressed: isPressed[1]))
+            //EMOJI BUTTON
+            if !isLocal{
+                Button(action:{
+                    emoteView = true
+                }){}
+                    .transaction { t in t.animation = nil }
+                    .pressAction{ isPressed [2] = true} onRelease: { isPressed[2] = false }
+                    .buttonStyle(EmoteButtonStyling(isPressed: isPressed[2]))
+            }
         }
         .padding(.bottom, 8)
         .customHeightForRollPlayView(landscape: landscape)

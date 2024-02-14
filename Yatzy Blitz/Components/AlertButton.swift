@@ -30,5 +30,3 @@ struct AlertButton: View {
         }
     }
 }
-
-

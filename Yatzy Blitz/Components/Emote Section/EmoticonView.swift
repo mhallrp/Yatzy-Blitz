@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct EmoticonView: View {
+    
     var emote: EmoticonAnimator.Emoticon
     
     var body: some View {

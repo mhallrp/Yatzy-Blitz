@@ -5,7 +5,6 @@ struct PortraitGameLayout: View {
     var viewModel: MultiplayerModel
     var isLocal: Bool
     var isAIMatch: Bool
-
     @Binding var emoteView:Bool
     var body: some View {
         VStack {

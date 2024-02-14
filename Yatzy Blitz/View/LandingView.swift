@@ -4,10 +4,10 @@ import GameKit
 struct LandingView: View {
     
     var isMatchStarted: Bool { viewModel.match != nil || gcManager.receivedInvite != nil }
-    
+    @ObservedObject var gcManager = GameCenterManager.shared
     @StateObject var viewModel = MultiplayerModel()
     @StateObject var gameData = GameData()
-    @ObservedObject var gcManager = GameCenterManager.shared
+    @StateObject var emoticonAnimator = EmoticonAnimator()
     @State private var showMultiplayerOptions = false
     @State private var navigationPath: [NavigationDestination] = []
     
@@ -17,7 +17,7 @@ struct LandingView: View {
                 ZStack {
                     UMPWrapper(canLoadAdsCallback: {})
                     BackgroundView()
-                    .onAppear { viewModel.match = nil }
+                        .onAppear { viewModel.match = nil }
                     if !isMatchStarted {
                         VStack{
                             Image("Logo")
@@ -56,10 +56,10 @@ struct LandingView: View {
             }
             .navigationDestination(for: NavigationDestination.self) { destination in
                 switch destination {
-                case .newAIGame: NewGameView(multiplayerModel: viewModel, gameData: gameData, isLocal: true, isAIMatch: true)
-                case .localMultiplayer: NewGameView(multiplayerModel: viewModel, gameData: gameData, isLocal: true, isAIMatch: false)
-                case .onlineMatch: NewGameView(multiplayerModel: viewModel, gameData: gameData, isLocal: false, isAIMatch: false)
-                        .onAppear { viewModel.gameData = gameData }
+                case .newAIGame: NewGameView(multiplayerModel: viewModel, gameData: gameData, emoticonAnimator: emoticonAnimator, isLocal: true, isAIMatch: true)
+                case .localMultiplayer: NewGameView(multiplayerModel: viewModel, gameData: gameData, emoticonAnimator: emoticonAnimator, isLocal: true, isAIMatch: false)
+                case .onlineMatch: NewGameView(multiplayerModel: viewModel, gameData: gameData, emoticonAnimator: emoticonAnimator, isLocal: false, isAIMatch: false)
+                        .onAppear { viewModel.gameData = gameData; viewModel.animate = emoticonAnimator }
                 case .settings:SettingsView()
                 case .profile:ProfileView()
                 }
@@ -68,3 +68,7 @@ struct LandingView: View {
         .accentColor(.black)
     }
 }
+//
+//#Preview {
+//    LandingView()
+//}

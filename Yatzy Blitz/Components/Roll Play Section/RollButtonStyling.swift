@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct RollButtonStyling: ButtonStyle {
+struct RollPlayButtonStyling: ButtonStyle {
     var active: Bool
     var roll: Bool
     var text: String

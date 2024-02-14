@@ -3,9 +3,14 @@ import SwiftUI
 struct EmoteView: View {
     
     @Binding var emoteView: Bool
+    var multiplayerModel: MultiplayerModel
     var animateEmoticon: (String) -> Void
     let emoticons: [[String]] = [["😀", "😉", "😍", "🤩", "😜"], ["🤔", "🙄", "😎", "😇", "😂"], ["🥰", "😅", "😤", "😱", "😓"]]
-
+        func encode(_ s: String) -> String {
+            let data = s.data(using: .nonLossyASCII, allowLossyConversion: true)!
+            return String(data: data, encoding: .utf8)!
+        }
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -23,6 +28,7 @@ struct EmoteView: View {
                                     emoteView = false
                                 }, animate: {
                                     animateEmoticon(emote)
+                                    multiplayerModel.sendEmoji(emoji: encode(emote))
                                 })
                                 .font(.system(size: min(geometry.size.width / 8, 50)))
                             }
@@ -38,23 +44,19 @@ struct EmoteView: View {
 }
 
 struct EmoticonButton: View {
-    
     let emote: String
     let action: () -> Void
     let animate: () -> Void
-    
     init(emote: String, action: @escaping () -> Void, animate: @escaping () -> Void) {
         self.emote = emote
         self.action = action
         self.animate = animate
     }
-
     init(emote: String, action: @escaping () -> Void) {
         self.emote = emote
         self.action = action
         self.animate = {}
     }
-
     var body: some View {
         Button(action: {
             animate()

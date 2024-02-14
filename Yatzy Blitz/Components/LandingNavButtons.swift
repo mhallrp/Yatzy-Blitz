@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct LandingNavButtons: View {
+    
     @Binding var navigationPath: [NavigationDestination]
 
     var body: some View {

@@ -129,7 +129,6 @@ extension GameData {
 }
 
 extension GameData {
-
     func initiateAITurn(completion: (() -> Void)? = nil) {
         let helpers = Helpers()
         let dataModel = GameFunctionality()

@@ -37,7 +37,7 @@ class RollPlayViewModel:ObservableObject {
             gameData.rollCount -= 1
             gameData.selected = []
             gameData.scoreChoice = ["","","","","","","","","","","","",""]
-            if !isLocal { multiplayerModel.sendCurrentGameState(endTurn: false) }
+        if !isLocal { multiplayerModel.sendCurrentGameState(endTurn: false) }
     }
     
     func handlePlayAction(gameData: GameData, multiplayerModel: MultiplayerModel, isAIMatch: Bool, isLocal:Bool) {

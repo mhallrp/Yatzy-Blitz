@@ -19,7 +19,6 @@ struct BackgroundButton: View {
     }
 }
 struct ChangeBackgroundStyling: ButtonStyle {
-    
     var image: String
     var pressedImage: String
     var isPressed: Bool
