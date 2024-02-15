@@ -23,7 +23,6 @@ class AdCoordinator: NSObject, ObservableObject, GADFullScreenContentDelegate {
         }
     }
     
-    
     func adDidRecordImpression(_ ad: GADFullScreenPresentingAd) {
         print("\(#function) called")
     }
@@ -41,7 +40,6 @@ class AdCoordinator: NSObject, ObservableObject, GADFullScreenContentDelegate {
         print("\(#function) called")
     }
     
-    
     func adWillDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
         DispatchQueue.main.async {
             self.adShown = true
@@ -53,8 +51,6 @@ class AdCoordinator: NSObject, ObservableObject, GADFullScreenContentDelegate {
         print("\(#function) called")
     }
     
-    
-    
     func presentAd(from viewController: UIViewController) {
         guard let fullScreenAd = ad else {
             return print("Ad wasn't ready")
@@ -64,13 +60,10 @@ class AdCoordinator: NSObject, ObservableObject, GADFullScreenContentDelegate {
 }
 
 struct AdViewControllerRepresentable: UIViewControllerRepresentable {
-    
     let viewController = UIViewController()
-    
     func makeUIViewController(context: Context) -> some UIViewController {
         return viewController
     }
-    
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
     }
 }

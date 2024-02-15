@@ -5,6 +5,7 @@ struct ScoreView: View {
     @ObservedObject var viewModel: MultiplayerModel
     let helpers = Helpers()
     var dataModel: GameFunctionality
+//    var diceMethods = DiceMethods()
     var isLocal: Bool
     var data: String
     var index: Int
@@ -48,11 +49,21 @@ struct ScoreView: View {
             gameData.playIsActive = false
             gameData.selected = []
         } else {
+//            gameData.playIsActive = true
+//            gameData.selected = [data]
+//            var choice = diceMethods.resultCheck(roll: gameData.currentRoll, type: data)
+//            if (gameData.p1Active ? gameData.player1Score[11] != nil && gameData.player1Score[11] != 0 : gameData.player2Score[11] != nil && gameData.player2Score[11] != 0){
+//                choice = choice + 50
+//            }
+//            gameData.scoreChoice[index] = String(choice)
+//            gameData.finalChoice = [index, Int(choice)]
+            
             gameData.playIsActive = true
             gameData.selected = [data]
             let choice = dataModel.selectionCheck(selection: data, currentRoll: gameData.currentRoll, hasYahtzee: gameData.p1Active ? gameData.player1Score[11] != nil && gameData.player1Score[11] != 0 : gameData.player2Score[11] != nil && gameData.player2Score[11] != 0)
             gameData.scoreChoice[index] = choice
             gameData.finalChoice = [index, Int(choice)!]
+            
         }
         if !isLocal { viewModel.sendCurrentGameState(endTurn: false) }
     }

@@ -3,6 +3,7 @@ import SwiftUI
 class RollPlayViewModel:ObservableObject {
 
     let gameFunctions = GameFunctionality()
+//    let diceMethods = DiceMethods()
     @AppStorage("rollAnimationOn") private var rollAnimationOn = true
     @AppStorage("isVibrationOn") private var isVibrationOn = true
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .soft)

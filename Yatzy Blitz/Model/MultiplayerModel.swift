@@ -14,9 +14,8 @@ class MultiplayerModel: NSObject, ObservableObject, GKMatchDelegate {
     @Published var rematchConfirmation: Bool? = nil
     var playerUUIDKey = UUID().uuidString
     var opponentUUIDKey: String?
-    
     var gameData: GameData?
-    var animate: EmoticonAnimator?
+    var animate: EmojiAnimator?
     
     func setup(match: GKMatch) {
         self.match = match
@@ -71,6 +70,7 @@ class MultiplayerModel: NSObject, ObservableObject, GKMatchDelegate {
             }
         }
     }
+    
     func sendInitialConnectionData() {
         let initialData = InitialConnectionData(playerUUID: self.playerUUIDKey)
         if let initialDataEncoded = try? JSONEncoder().encode(initialData) {

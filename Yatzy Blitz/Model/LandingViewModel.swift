@@ -2,9 +2,7 @@ import SwiftUI
 import GameKit
 
 extension LandingView{
-    
     func presentMatchmaker() {
-        
         let matchRequest = GKMatchRequest()
         matchRequest.minPlayers = 2
         matchRequest.maxPlayers = 2

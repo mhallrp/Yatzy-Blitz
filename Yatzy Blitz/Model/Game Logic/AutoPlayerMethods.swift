@@ -6,6 +6,8 @@ class ComputerPlayer {
     
     private var rollCount = 0
     
+    var test = GameFunctionality()
+    
     init(currentScores: [Int?]) {
         self.filledCategories = Set(currentScores.enumerated()
             .compactMap { (index, element) in
@@ -34,6 +36,23 @@ class ComputerPlayer {
             ("Yahtzee", yahtzeeScore(roll: roll)),
             ("Chance", roll.reduce(0, +)),
         ]
+        
+//        let potentialScores = [
+//            ("1", Int(test.selectionCheck(selection: "1", currentRoll: roll, hasYahtzee: false))!),
+//            ("2", Int(test.selectionCheck(selection: "2", currentRoll: roll, hasYahtzee: false))!),
+//            ("3", Int(test.selectionCheck(selection: "3", currentRoll: roll, hasYahtzee: false))!),
+//            ("4", Int(test.selectionCheck(selection: "4", currentRoll: roll, hasYahtzee: false))!),
+//            ("5", Int(test.selectionCheck(selection: "5", currentRoll: roll, hasYahtzee: false))!),
+//            ("6", Int(test.selectionCheck(selection: "6", currentRoll: roll, hasYahtzee: false))!),
+//            ("Times3", Int(test.selectionCheck(selection: "Times3", currentRoll: roll, hasYahtzee: false))!),
+//            ("Times4", Int(test.selectionCheck(selection: "Times4", currentRoll: roll, hasYahtzee: false))!),
+//            ("FullHouse", Int(test.selectionCheck(selection: "FullHouse", currentRoll: roll, hasYahtzee: false))!),
+//            ("Small", Int(test.selectionCheck(selection: "Small", currentRoll: roll, hasYahtzee: false))!),
+//            ("Large", largeStraightScore(roll: roll)),
+//            ("Yahtzee", yahtzeeScore(roll: roll)),
+//            ("Chance", roll.reduce(0, +)),
+//        ]
+        
         if yahtzeeScore(roll: roll) > 0 && filledCategories.contains("Yahtzee") {
             let possibleBonusCategories = filledCategories.subtracting(["Yahtzee"])
             if let categoryToBonus = possibleBonusCategories.min(by: { a, b in
@@ -64,9 +83,9 @@ class ComputerPlayer {
         return availableScores.first ?? ("", 0)
     }
     
-    func sumOfNumber(number: Int, roll: [Int]) -> Int {
-        return roll.filter { $0 == number }.reduce(0, +)
-    }
+//    func sumOfNumber(number: Int, roll: [Int]) -> Int {
+//        return roll.filter { $0 == number }.reduce(0, +)
+//    }
     
     func threeOfAKindScore(roll: [Int]) -> Int {
         for num in 1...6 {

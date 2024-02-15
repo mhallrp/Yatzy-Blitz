@@ -2,15 +2,13 @@ import SwiftUI
 import GameKit
 
 struct LandingView: View {
-    
     var isMatchStarted: Bool { viewModel.match != nil || gcManager.receivedInvite != nil }
     @ObservedObject var gcManager = GameCenterManager.shared
     @StateObject var viewModel = MultiplayerModel()
     @StateObject var gameData = GameData()
-    @StateObject var emoticonAnimator = EmoticonAnimator()
+    @StateObject var emoticonAnimator = EmojiAnimator()
     @State private var showMultiplayerOptions = false
     @State private var navigationPath: [NavigationDestination] = []
-    
     var body: some View {
         NavigationStack(path: $navigationPath) {
             NavigationView {
@@ -56,9 +54,9 @@ struct LandingView: View {
             }
             .navigationDestination(for: NavigationDestination.self) { destination in
                 switch destination {
-                case .newAIGame: NewGameView(multiplayerModel: viewModel, gameData: gameData, emoticonAnimator: emoticonAnimator, isLocal: true, isAIMatch: true)
-                case .localMultiplayer: NewGameView(multiplayerModel: viewModel, gameData: gameData, emoticonAnimator: emoticonAnimator, isLocal: true, isAIMatch: false)
-                case .onlineMatch: NewGameView(multiplayerModel: viewModel, gameData: gameData, emoticonAnimator: emoticonAnimator, isLocal: false, isAIMatch: false)
+                case .newAIGame: NewGameView(multiplayerModel: viewModel, gameData: gameData, emojiAnimator: emoticonAnimator, isLocal: true, isAIMatch: true)
+                case .localMultiplayer: NewGameView(multiplayerModel: viewModel, gameData: gameData, emojiAnimator: emoticonAnimator, isLocal: true, isAIMatch: false)
+                case .onlineMatch: NewGameView(multiplayerModel: viewModel, gameData: gameData, emojiAnimator: emoticonAnimator, isLocal: false, isAIMatch: false)
                         .onAppear { viewModel.gameData = gameData; viewModel.animate = emoticonAnimator }
                 case .settings:SettingsView()
                 case .profile:ProfileView()
